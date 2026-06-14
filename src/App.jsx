@@ -1,5 +1,6 @@
-import Sidebar from './components/Layout/Sidebar'
 import { useState } from 'react'
+import Sidebar from './components/Layout/Sidebar'
+import Header from './components/Layout/Header'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,6 +11,9 @@ function App() {
       dark:to-slate-900 transition-all duration-500>
           <div className="flex h-screen overflow-hidden">
              <Sidebar />
+             <div className="flex-1 flex flex-col overflow-hidden">
+                <Header />
+             </div>
           </div>
       </div>
     </>
