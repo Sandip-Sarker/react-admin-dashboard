@@ -1,5 +1,6 @@
-import { Bell, Filter, Menu, Plus, Search, Sun } from 'lucide-react'
+import { Bell, Filter, Menu, Plus, Search, Settings, Sun } from 'lucide-react'
 import React from 'react'
+import avatar from "../../assets/image/avatar.jpg";
 
 const Header = () => {
     return (
@@ -44,6 +45,16 @@ const Header = () => {
                     <button className="relative p-2.5 rounded-xl text-slate-600 dark:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
                         <Bell className="w-6 h-6" />
                         <span className="absolute -top-1 right-1 w-5 h-5 bg-red-500 rounded-full text-white text-xs font-bold items-center justify-center">3</span>
+                    </button>
+
+                    {/* Settings */}
+                    <button className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <Settings  className="w-6 h-6" />
+                    </button>
+
+                    {/* User Profile */}
+                    <button className="flex items-center space-x-3 pl-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <img src={avatar} alt="User Profile" className="w-8 h-8 rounded-full" />
                     </button>
                 </div>
 
