@@ -1,4 +1,4 @@
-import { Bell, Filter, Menu, Plus, Search, Settings, Sun } from 'lucide-react'
+import { Bell, ChevronDown, Filter, Menu, Plus, Search, Settings, Sun } from 'lucide-react'
 import React from 'react'
 import avatar from "../../assets/image/avatar.jpg";
 
@@ -53,9 +53,17 @@ const Header = () => {
                     </button>
 
                     {/* User Profile */}
-                    <button className="flex items-center space-x-3 pl-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                        <img src={avatar} alt="User Profile" className="w-8 h-8 rounded-full" />
-                    </button>
+                    <div className="flex items-center space-x-3 pl-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <img src={avatar} alt="User Profile" className="w-8 h-8 rounded-full" ring="2" ring-blue-500/>
+                    </div>
+                    <div className="hidden md:block">
+                        <p className="text-sm font-medium text-stone-500 dark:text-slate-400">John Doe</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Administrator</p>
+                        
+                    </div>
+                    
+                    <ChevronDown className="w-4 h-4 text-slate-40" />
+                  
                 </div>
 
             </div>
