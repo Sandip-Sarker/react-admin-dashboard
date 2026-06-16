@@ -2,13 +2,16 @@ import { Bell, ChevronDown, Filter, Menu, Plus, Search, Settings, Sun } from 'lu
 import React from 'react'
 import avatar from "../../assets/image/avatar.jpg";
 
-const Header = () => {
+const Header = ({ sideBarCollapsed, onToggleSidebar }) => {
     return (
         <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 px-6 py-4">
             <div className="flex items-center justify-between">
                 {/* left section */}
                 <div className="flex items-center space-x-3">
-                    <button className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300">
+                    <button onli
+                        className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300"
+                        onClick={onToggleSidebar}
+                    >
                         <Menu className="w-6 h-6" />
                     </button>
 

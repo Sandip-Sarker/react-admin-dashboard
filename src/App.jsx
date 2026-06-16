@@ -4,7 +4,7 @@ import Header from './components/Layout/Header'
 
 function App() {
   const [currentPage, setCurrentPage] = useState("dashboard");
-  const [collapsed, setCollapsed] = useState(false);
+  const [sideBarCollapsed, setSideBarCollapsed] = useState(false);
 
 
   return (
@@ -13,12 +13,14 @@ function App() {
       dark:to-slate-900 transition-all duration-500>
           <div className="flex h-screen overflow-hidden">
              <Sidebar
-                  collapsed={collapsed}
+                  collapsed={sideBarCollapsed}
                   currentPage={currentPage}
-                  onPageChange={setCurrentPage}
+                  onPageChange={setCurrentPage} 
               />
              <div className="flex-1 flex flex-col overflow-hidden">
-                <Header />
+                <Header  
+                  sideBarCollapsed={sideBarCollapsed} 
+                  onToggleSidebar={() => setSideBarCollapsed(!sideBarCollapsed)}/>
              </div>
           </div>
       </div>

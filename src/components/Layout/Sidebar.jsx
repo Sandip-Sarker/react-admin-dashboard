@@ -4,7 +4,10 @@ import {
     ChevronDown,
     DollarSign,
     Folder,
+    Landmark,
     LayoutDashboard,
+    Mail,
+    Monitor,
     Settings,
     TrafficConeIcon,
     User,
@@ -51,6 +54,23 @@ const menuItems = [
         id: "settings",
         label: "Settings",
         icon: Settings,
+        subMenu: [
+            {
+                id: "System Settings",
+                label: "System Settings",
+                icon: Monitor,
+            },
+            {
+                id: "Email Settings",
+                label: "Email Settings",
+                icon: Mail,
+            },
+            {
+                id: "Stripe Settings",
+                label: "Stripe Settings",
+                icon: Landmark,
+            }
+        ],
     },
 ];
 
@@ -126,6 +146,16 @@ const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
                                         <span className="ml-auto text-xs bg-red-500 text-white px-2 py-1 rounded-full">
                                             {item.badge}
                                         </span>
+                                    )}
+
+                                    {item.subMenu && (
+                                        <ChevronDown
+                                            className={`w-4 h-4 ml-auto transition-transform duration-200 ${
+                                                expandedMenu.has(item.id)
+                                                    ? "rotate-180"
+                                                    : ""
+                                            }`}
+                                        />
                                     )}
                                 </div>
                                 </>
