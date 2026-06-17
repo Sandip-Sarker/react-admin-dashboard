@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Sidebar from './components/Layout/Sidebar'
 import Header from './components/Layout/Header'
 import Dashboard from './components/Dashboard/Dashboard'
-// import Analytics from './components/Analytics/Analytics'
+import UserList from './components/User/UserList';
 // import Settings from './components/Settings/Settings'
 
 function App() {
@@ -27,8 +27,8 @@ function App() {
 
                   <main className="flex-1 overflow-y-auto">
                     {currentPage === "dashboard" && <Dashboard />}
-                    {/* {currentPage === "analytics" && <Analytics />}
-                    {currentPage === "settings" && <Settings />} */}
+                    {currentPage === "userlist" && <UserList />}
+
                   </main>
              </div>
           </div>
