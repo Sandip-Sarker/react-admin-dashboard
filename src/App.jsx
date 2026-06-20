@@ -3,10 +3,11 @@ import Sidebar from './components/Layout/Sidebar'
 import Header from './components/Layout/Header'
 import Dashboard from './components/Dashboard/Dashboard'
 import UserList from './components/User/UserList';
+
 // import Settings from './components/Settings/Settings'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("dashboard");
+  const [currentPage, setCurrentPage] = useState(['dashboard']);
   const [sideBarCollapsed, setSideBarCollapsed] = useState(false);
 
 
@@ -27,8 +28,7 @@ function App() {
 
                   <main className="flex-1 overflow-y-auto">
                     {currentPage === "dashboard" && <Dashboard />}
-                    {currentPage === "userlist" && <UserList />}
-
+                    {currentPage === "users" && <UserList />}
                   </main>
              </div>
           </div>
