@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
     BarChart2,
     ChevronDown,
@@ -74,7 +75,9 @@ const menuItems = [
     },
 ];
 
-const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
+const Sidebar = ({ collapsed }) => {
+    const location = useLocation();
+
     const [expandedMenu, setExpandedMenu] = React.useState(
         new Set(["analytics"])
     );
@@ -89,6 +92,13 @@ const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
         }
 
         setExpandedMenu(newExpandedMenu);
+    };
+
+    const isActive = (itemId) => {
+        if (itemId === "dashboard") {
+            return location.pathname === "/dashboard" || location.pathname === "/";
+        }
+        return location.pathname === `/${itemId}`;
     };
 
     return (
@@ -121,34 +131,22 @@ const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
             <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
                 {menuItems.map((item) => (
                     <div key={item.id}>
-                        <button
-                            onClick={() => {
-                                if (item.subMenu) {
-                                    toggleSubMenu(item.id);
-                                } else {
-                                    onPageChange(item.id);
-                                }
-                            }}
-                            className={`w-full flex items-center p-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                                currentPage === item.id
-                                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow"
-                                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-                            }`}
-                        >
-                            <item.icon className="w-5 h-5 flex-shrink-0" />
+                        {item.subMenu ? (
+                            <button
+                                onClick={() => toggleSubMenu(item.id)}
+                                className={`w-full flex items-center p-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                                    isActive(item.id)
+                                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow"
+                                        : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                                }`}
+                            >
+                                <item.icon className="w-5 h-5 flex-shrink-0" />
 
-                            {!collapsed && (
-                                <>
-                               <div className="flex items-center flex-1 ml-3">
-                                    <span>{item.label}</span>
+                                {!collapsed && (
+                                    <>
+                                   <div className="flex items-center flex-1 ml-3">
+                                        <span>{item.label}</span>
 
-                                    {item.badge && (
-                                        <span className="ml-auto text-xs bg-red-500 text-white px-2 py-1 rounded-full">
-                                            {item.badge}
-                                        </span>
-                                    )}
-
-                                    {item.subMenu && (
                                         <ChevronDown
                                             className={`w-4 h-4 ml-auto transition-transform duration-200 ${
                                                 expandedMenu.has(item.id)
@@ -156,11 +154,36 @@ const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
                                                     : ""
                                             }`}
                                         />
-                                    )}
-                                </div>
-                                </>
-                            )}
-                        </button>
+                                    </div>
+                                    </>
+                                )}
+                            </button>
+                        ) : (
+                            <Link
+                                to={`/${item.id}`}
+                                className={`w-full flex items-center p-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                                    isActive(item.id)
+                                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow"
+                                        : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                                }`}
+                            >
+                                <item.icon className="w-5 h-5 flex-shrink-0" />
+
+                                {!collapsed && (
+                                    <>
+                                   <div className="flex items-center flex-1 ml-3">
+                                        <span>{item.label}</span>
+
+                                        {item.badge && (
+                                            <span className="ml-auto text-xs bg-red-500 text-white px-2 py-1 rounded-full">
+                                                {item.badge}
+                                            </span>
+                                        )}
+                                    </div>
+                                    </>
+                                )}
+                            </Link>
+                        )}
 
                         {/* Sub Menu */}
                         {!collapsed &&
@@ -168,13 +191,11 @@ const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
                             expandedMenu.has(item.id) && (
                                 <div className="ml-8 mt-2 space-y-1">
                                     {item.subMenu.map((sub) => (
-                                        <button
+                                        <Link
                                             key={sub.id}
-                                            onClick={() =>
-                                                onPageChange(sub.id)
-                                            }
+                                            to={`/${sub.id}`}
                                             className={`w-full flex items-center p-2 rounded-lg text-sm transition-all duration-200 ${
-                                                currentPage === sub.id
+                                                isActive(sub.id)
                                                     ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow"
                                                     : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                                             }`}
@@ -183,7 +204,7 @@ const Sidebar = ({ collapsed, currentPage, onPageChange }) => {
                                             <span className="ml-2">
                                                 {sub.label}
                                             </span>
-                                        </button>
+                                        </Link>
                                     ))}
                                 </div>
                             )}

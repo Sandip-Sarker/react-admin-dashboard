@@ -44,14 +44,15 @@ const Pagination = ({ page, totalPages, onPrev, onNext, setPage }) => (
 );
 
 const UserList = () => {
-
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const pageSize = 4;
 
     const pagedUsers = useMemo(() => {
         const start = (page - 1) * pageSize;
         return users.slice(start, start + pageSize);
-    }, [user, pageSize]);
+    }, [users, page, pageSize]);
 
     const totalPages = Math.ceil(users.length / pageSize);
 
@@ -62,10 +63,6 @@ const UserList = () => {
     const onNext = () => {
         setPage((current) => Math.min(totalPages, current + 1));
     };
-
-
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getUsers = async () => {
@@ -112,7 +109,7 @@ const UserList = () => {
                             <tr key={user.id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-700 dark:text-slate-200">{(page - 1) * pageSize + key + 1}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-700 dark:text-slate-200 flex gap-3">
-                                    <img className="h-10 w-10 rounded-full object-cover" src={user.image} alt={user.name} />
+                                    <img className="h-10 w-10 rounded-full object-cover" src={user.image} alt={user.firstName} />
                                     {user.firstName} {user.lastName}
                                     </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-300">{user.email}</td>

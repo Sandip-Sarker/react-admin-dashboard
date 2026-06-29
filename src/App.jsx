@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Route, Routes,  Navigate } from 'react-router-dom'
 import Sidebar from './components/Layout/Sidebar'
 import Header from './components/Layout/Header'
 import Dashboard from './components/Dashboard/Dashboard'
@@ -7,7 +8,6 @@ import UserList from './components/User/UserList';
 // import Settings from './components/Settings/Settings'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(['dashboard']);
   const [sideBarCollapsed, setSideBarCollapsed] = useState(false);
 
 
@@ -18,8 +18,6 @@ function App() {
           <div className="flex h-screen overflow-hidden">
              <Sidebar
                   collapsed={sideBarCollapsed}
-                  currentPage={currentPage}
-                  onPageChange={setCurrentPage} 
               />
              <div className="flex-1 flex flex-col overflow-hidden">
                 <Header  
@@ -27,8 +25,11 @@ function App() {
                   onToggleSidebar={() => setSideBarCollapsed(!sideBarCollapsed)}/>
 
                   <main className="flex-1 overflow-y-auto">
-                    {currentPage === "dashboard" && <Dashboard />}
-                    {currentPage === "users" && <UserList />}
+                    <Routes>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/users" element={<UserList />} />
+                      {/* <Route path="*" element={<Navigate to="/dashboard" replace />} /> */}
+                    </Routes>
                   </main>
              </div>
           </div>
@@ -38,3 +39,4 @@ function App() {
 }
 
 export default App
+
