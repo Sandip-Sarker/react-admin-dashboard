@@ -47,7 +47,7 @@ const UserList = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
-    const pageSize = 4;
+    const pageSize = 10;
 
     const pagedUsers = useMemo(() => {
         const start = (page - 1) * pageSize;
